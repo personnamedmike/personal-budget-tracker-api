@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_07_191200) do
+ActiveRecord::Schema.define(version: 2022_03_08_232915) do
 
   create_table "expenses", force: :cascade do |t|
     t.string "description"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 2022_03_07_191200) do
   create_table "incomes", force: :cascade do |t|
     t.string "description"
     t.float "amount"
+    t.string "date"
+    t.string "notes"
     t.integer "user_id"
     t.index ["user_id"], name: "index_incomes_on_user_id"
   end

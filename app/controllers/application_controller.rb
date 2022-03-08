@@ -54,7 +54,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/income" do
-    income = Income.find.all
+    income = Income.all
     income.to_json
   end
 
