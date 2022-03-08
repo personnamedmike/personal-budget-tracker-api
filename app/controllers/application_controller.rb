@@ -3,17 +3,17 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
   get "/" do
-    { message: "Good luck with your project!" }.to_json
+    Personal Budget Tracker
   end
 
-  get "/read_expense/:id" do
+  get "/expenses/:id" do
     expense = Expense.find(params[:id])
     expense.to_json
   end
 
-  get "/display_all_expenses" do
-    expense = Expense.all
-    expense.to_json
+  get "/expenses" do
+    expenses = Expense.all
+    expenses.to_json
   end
 
   post "/add_expense" do
@@ -30,7 +30,7 @@ class ApplicationController < Sinatra::Base
   end
 
   patch "/update_expense/:id" do
-    binding.pry
+    # binding.pry
     expense = Expense.find(params[:id]).update(
       description: params[:description],
       monthly: params[:monthly],
@@ -43,17 +43,17 @@ class ApplicationController < Sinatra::Base
   end
 
   delete "/delete_expense/:id" do
-    binding.pry
+    # binding.pry
     expense = Expense.find(params[:id])
     expense.destroy
   end
 
-  get "/read_income/:id" do
+  get "/income/:id" do
     income = Income.find(params[:id])
     income.to_json
   end
 
-  get "/read_all_income" do
+  get "/income" do
     income = Income.find.all
     income.to_json
   end
