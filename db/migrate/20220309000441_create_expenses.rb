@@ -6,6 +6,7 @@ class CreateExpenses < ActiveRecord::Migration[6.1]
       t.string :annual
       t.string :frequency
       t.string :due_date
+      t.boolean :paid
       t.string :notes
       t.references :user
     end

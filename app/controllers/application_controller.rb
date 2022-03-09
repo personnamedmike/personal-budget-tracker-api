@@ -31,14 +31,7 @@ class ApplicationController < Sinatra::Base
 
   patch "/update_expense/:id" do
     # binding.pry
-    expense = Expense.find(params[:id]).update(
-      description: params[:description],
-      monthly: params[:monthly],
-      annual: params[:annual],
-      frequency: params[:frequency],
-      due_date: params[:due_date],
-      notes: params[:notes]
-    )
+    expense = Expense.find(params[:id]).update(params)
     expense.to_json
   end
 

@@ -14,47 +14,27 @@ User.create(
     name: "Donald Obama"
 )
 
-Expense.create(
-    description: "1st Mortgage",
-    monthly: 1000,
-    frequency: "monthly",
-    due_date: "April 1, 2022",
-    notes: "Florida home",
-    user_id: User.all.sample
-)
-
-Expense.create(
-    description: "2st Mortgage",
-    monthly: 1200,
-    frequency: "monthly",
-    due_date: "April 1, 2022",
-    notes: "Texas home",
-    user_id: User.all.sample
-)
-
-Expense.create(
-    description: "Lambo",
-    monthly: 7000,
-    frequency: "monthly",
-    due_date: "April 1, 2022",
-    notes: "New Lambo",
-    user_id: User.all.sample
-)
-
-Income.create(
-    description: "React contract",
-    amount: 50000,
-    user_id: User.all.sample,
-    notes: "Fun job!"
-)
-
-Income.create(
-    description: "Web design",
-    amount: 2500,
-    user_id: User.all.sample,
-    notes: "html/css gig"
-)
+10.times do
+    Expense.create(
+        description: Faker::ElectricalComponents.active,
+        monthly: rand(1..350),
+        due_date: Faker::Date.forward(days: 90),
+        frequency: "one-time",
+        paid: Faker::Boolean.boolean(true_ratio: 0.2),
+        notes: Faker::Quote.singular_siegler,
+        user_id: User.all.sample
+    )
+end
 
 
+8.times do
+    Income.create(
+        description: Faker::Job.key_skill,
+        amount: rand(2000..3000),
+        date: Faker::Date.between(from: '2020-01-01', to:  Date.today),
+        user_id: User.last,
+        notes: Faker::Quote.singular_siegler
+    )
+end
 
 puts "✅ Done seeding!"
