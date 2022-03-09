@@ -2,8 +2,8 @@ class CreateExpenses < ActiveRecord::Migration[6.1]
   def change
     create_table :expenses do |t|
       t.string :description
-      t.float :monthly
-      t.string :annual
+      t.float :cost
+      t.string :date
       t.string :frequency
       t.string :due_date
       t.boolean :paid

@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_09_000441) do
+ActiveRecord::Schema.define(version: 2022_03_09_210543) do
 
   create_table "expenses", force: :cascade do |t|
     t.string "description"
-    t.float "monthly"
-    t.string "annual"
+    t.float "cost"
+    t.string "date"
     t.string "frequency"
     t.string "due_date"
     t.boolean "paid"

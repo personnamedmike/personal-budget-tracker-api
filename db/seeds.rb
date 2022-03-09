@@ -10,16 +10,14 @@ User.create(
     name: "Vladimir Biden"
 )
 
-User.create(
-    name: "Donald Obama"
-)
 
 10.times do
     Expense.create(
         description: Faker::ElectricalComponents.active,
-        monthly: rand(1..350),
-        due_date: Faker::Date.forward(days: 90),
+        cost: rand(1..350),
+        date: Faker::Date.backward(days: 365),
         frequency: "one-time",
+        due_date: Faker::Date.forward(days: 60),
         paid: Faker::Boolean.boolean(true_ratio: 0.2),
         notes: Faker::Quote.singular_siegler,
         user_id: User.all.sample

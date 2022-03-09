@@ -2,9 +2,9 @@ class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
   # Add your routes here
-  get "/" do
-    Personal Budget Tracker
-  end
+  # get "/" do
+  #   Personal Budget Tracker
+  # end
 
   get "/expenses/:id" do
     expense = Expense.find(params[:id])
@@ -34,6 +34,52 @@ class ApplicationController < Sinatra::Base
     expense = Expense.find(params[:id]).update(params)
     expense.to_json
   end
+
+  get "/expense_summary/:time" do
+    case params[:time]
+    when "current-month"
+      this_month = Expense.all.filter do |expense|
+        date = Date.parse(expense.date)
+        date.month == Date.today.month && date.year == Date.today.year
+      end
+      costs = this_month.pluck('cost').sum
+      costs.to_json
+    when "last-month"
+      last_month = Expense.all.filter do |expense|
+        date = Date.parse(expense.date)
+        date.month == Date.today.prev_month.month && date.year == Date.today.year
+      end
+      costs = last_month.pluck('cost').sum
+      costs.to_json
+    when "last-90-days"
+      last_90 = Expense.all.filter do |expense|
+        date = Date.parse(expense.date)
+        date >= Date.today-90
+        # binding.pry
+      end
+      costs = last_90.pluck('cost').sum
+      costs.to_json
+    when "current-year"
+      current_year = Expense.all.filter do |expense|
+        date = Date.parse(expense.date)
+        Date.today.year == date.year
+      end
+      costs = current_year.pluck('cost').sum
+      costs.to_json
+    when "last-year"
+      last_year = Expense.all.filter do |expense|
+        date = Date.parse(expense.date)
+        # Date.today.year == date.year-1
+        date.year == Date.today.year-1
+        # binding.pry
+      end
+      costs = last_year.pluck('cost').sum
+      costs.to_json
+    end
+  end
+
+
+
 
   delete "/delete_expense/:id" do
     # binding.pry
