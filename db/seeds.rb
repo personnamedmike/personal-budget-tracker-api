@@ -6,9 +6,7 @@ puts "🌱 Seeding spices..."
 
 # Seed your database here
 
-User.create(
-    name: "Vladimir Biden"
-)
+User.create(name: "Vladimir Biden")
 
 
 10.times do
@@ -29,8 +27,8 @@ end
     Income.create(
         description: Faker::Job.key_skill,
         amount: rand(2000..3000),
-        date: Faker::Date.between(from: '2020-01-01', to:  Date.today),
-        user_id: User.last,
+        date: Faker::Date.between(from: '2021-01-01', to:  Date.today),
+        user_id: User.all.sample,
         notes: Faker::Quote.singular_siegler
     )
 end
