@@ -1,10 +1,5 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
-  
-  # Add your routes here
-  # get "/" do
-  #   Personal Budget Tracker
-  # end
 
   get "/expenses/:id" do
     expense = Expense.find(params[:id])
@@ -17,7 +12,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/add_expenses" do
-    # binding.pry
     expense = Expense.create(
       description: params[:description],
       cost: params[:cost],
@@ -31,7 +25,6 @@ class ApplicationController < Sinatra::Base
   end
 
   patch "/update_expense/:id" do
-    # binding.pry
     expense = Expense.find(params[:id])
     expense.update(params)
     expense.to_json
@@ -57,7 +50,6 @@ class ApplicationController < Sinatra::Base
       last_90 = Expense.all.filter do |expense|
         date = Date.parse(expense.date)
         date >= Date.today-90
-        # binding.pry
       end
       costs = last_90.pluck('cost').sum
       costs.to_json
@@ -71,9 +63,7 @@ class ApplicationController < Sinatra::Base
     when "last-year"
       last_year = Expense.all.filter do |expense|
         date = Date.parse(expense.date)
-        # Date.today.year == date.year-1
         date.year == Date.today.year-1
-        # binding.pry
       end
       costs = last_year.pluck('cost').sum
       costs.to_json
@@ -84,7 +74,6 @@ class ApplicationController < Sinatra::Base
   end
 
   delete "/delete_expense/:id" do
-    # binding.pry
     expense = Expense.find(params[:id])
     expense.destroy
   end
@@ -100,10 +89,11 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/add_income" do
-    # binding.pry
     income = Income.create(
+      # binding.pry
       description: params[:description],
-      amount: params[:amount]
+      amount: params[:amount],
+      date: params[:date]
     )
     income.to_json
   end
@@ -141,8 +131,8 @@ class ApplicationController < Sinatra::Base
       last_90 = Income.all.filter do |income|
         date = Date.parse(income.date)
         date >= Date.today-90
-        # binding.pry
       end
+
       total = last_90.pluck('amount').sum
       total.to_json
     when "current-year"
@@ -155,9 +145,7 @@ class ApplicationController < Sinatra::Base
     when "last-year"
       last_year = Income.all.filter do |income|
         date = Date.parse(income.date)
-        # Date.today.year == date.year-1
-        date.year == Date.today.year-1
-        # binding.pry
+        date.year == Date.today.year - 1
       end
       total = last_year.pluck('amount').sum
       total.to_json
