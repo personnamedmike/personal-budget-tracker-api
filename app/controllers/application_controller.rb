@@ -16,7 +16,7 @@ class ApplicationController < Sinatra::Base
     expenses.to_json
   end
 
-  post "/add_expense" do
+  post "/add_expenses" do
     # binding.pry
     expense = Expense.create(
       description: params[:description],
@@ -29,9 +29,10 @@ class ApplicationController < Sinatra::Base
     expense.to_json
   end
 
-  patch "/update_expense/:id" do
+  patch "/update_expenses/:id" do
     # binding.pry
-    expense = Expense.find(params[:id]).update(params)
+    expense = Expense.find(params[:id])
+    expense.update(params)
     expense.to_json
   end
 
@@ -87,12 +88,12 @@ class ApplicationController < Sinatra::Base
     expense.destroy
   end
 
-  get "/income/:id" do
+  get "/incomes/:id" do
     income = Income.find(params[:id])
     income.to_json
   end
 
-  get "/income" do
+  get "/incomes" do
     income = Income.all
     income.to_json
   end
@@ -106,7 +107,7 @@ class ApplicationController < Sinatra::Base
     income.to_json
   end
 
-  patch "/update_income/:id" do
+  patch "/update_incomes/:id" do
     income = Income.find(params[:id]).update(
       description: params[:description],
       amount: params[:amount]
@@ -114,7 +115,7 @@ class ApplicationController < Sinatra::Base
     income.to_json
   end
 
-  delete '/delete_income/:id' do
+  delete '/delete_incomes/:id' do
     income = Income.find(params[:id])
     income.destroy
   end
