@@ -1,185 +1,88 @@
-# Group Agreement
+# Title:
+"Personal Budget Tracker"
 
-Working hours:
--Work during flatiron course hours
--Work until you’re too tired to work
+# Project Description:
 
-Github workflow:
--Work on separate branches
--Group will review work and agree before merging with master branch
+This repository contains the backend architecture which was originally built to be used with this fronend: https://personnamedmike.github.io/personal-budget-tracker/.
 
-- - NOT OKAY to push to master branch without prior group discussion
+We used Active Record for the database, Sinatra to build the API, and Ruby to add logic to the API.
 
-Communication:
--Slack to share links
--Zoom for group discussions
--Afters hours will communicate over slack mostly
+This project was for "phase 3" of Flatiron School school's Software Engineering bootcamp. We had 4 days to complete a fullstack app. The assignment was to play around with Active Record, Sinatra, Ruby, and connect it with a React frontend.
 
-Conflict resolution:
--Conflicts are unlikely because of the time limits of the project
--If conflict arises, we will discuss
+In a sense, this project was a second iteration of tzjorden's and my app, "Unrekt Crypto Tracker." https://github.com/personnamedmike/unrekt-crypto-tracker. The key differences were that we wrote cleaner code this time, and implemented our own backend.
 
----
+This first iteration of Personal Budget Tracker is less buggy than Unrekt Crypto Tracker, and is useful enough to use in your everyday life.
 
-# timeline
+# How to Install and Run Personal Budget Tracker
 
-One sentence app description:
--This app will help you track and manage your personal expenses
+Currently the best and most secure way to run this project is by forking and cloning both repositories. This repo you're currently in is for the api, and you can fork the frontend here https://personnamedmike.github.io/personal-budget-tracker/.
 
-User Stories:
--A user will be able to keep track of their monthly and annual expenses/income
--A user will be able to get notified when a bill
+Running this app on your local machine and storing data on a local sqlite3 database will ensure a base level of privacy of your financial transactions.
 
-# 3/7 - monday
+# How to use this project
 
-✅-Build out main structure of project. Draw out diagrams
-✅-build out 2 models with one-to-many relationship
+-Fork and clone this repository to your local machine
+-cd into your project's directory. Use the following commands:
+-To install Ruby Gems: $ bundle install
+-Run migrations: $ bundle exec db:migrations
+-To test the database with dummy data: $ bundle exec db:seed
+-To start server: $ bundle exec rake console
 
-1. User — Home Expenses
-   - 1 user “has many” expenses
-2. Users — Budgets
-   - food = $500/month
-   - gas = $300
+Server should be running on http://localhost:9292.
 
-✅- Use Active Record to interact with a database.
-✅- Have a minimum of two models with a one-to-many relationship.
+If you wish to build on top of the project, you can explore the various endpoints in app/controllers/application_controller.rb
 
-# 3/8 - tuesday
+# Important endpoints:
 
-✅- Start building out API
-✅- Create API routes in Sinatra that handles at least three different CRUD actions for at least one of your Active Record models.
-- Use good OO design patterns. You should have separate classes for each of your models, and create instance and class methods as necessary.
+# Add expense entry:
+post '/add_expenses'
 
-# 3/9 - wednesday
+# Modify expense by id. Currently this is used to look up expenses by its "paid" boolean value.
+patch 'update/expenses/:id'
 
-- Work on styling
+# Delete expense entry:
+delete 'delete_expense/:id'
 
-# 3/10 - Thursday
+# Add income entry: 
+post '/add_income'
 
-- (stretch deliverable) - BALANCE TRACKER - calculate how much extra money you need in order to pay a bill. For example, utilities
-- Link app with BankAmerica API to pull in your expenses and do calculations
+# Read all income entries: 
+get '/incomes'
 
-# 3/11 - Friday
+# Delete income entry:
+delete '/delete_incomes/:id'
 
-- Present
+# Read expenses by time. Currently this can lookup an expense summary based on a few options: "current-month", "last-month", "last-90-days", "current-year", "last-year", "all time":
+get '/expenses_summary/:time'
 
-———
+# Read incomes by time. Same as the previously mentioned endpoint, but for incomes:
+get '/incomes_summary/:time'
 
-# Phase 3 Project Guidelines
+# Credits
+Other collaborators on this product:
+TzJorden: https://github.com/tzjorden
+JoshHayles: https://github.com/JoshHayles
 
-## Learning Goals
+--
 
-- Build a web basic API with Sinatra and Active Record to support a React
-  frontend
+MIT License
 
-## Introduction
+Copyright (c) 2022 PersonNamedMike
 
-Congrats on getting through all the material for Phase 3! Now's the time to put
-it all together and build something from scratch to reinforce what you know and
-expand your horizons.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The focus of this project is **building a Sinatra API backend** that uses
-**Active Record** to access and persist data in a database, which will be used
-by a separate **React frontend** that interacts with the database via the API.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## Requirements
-
-For this project, you must:
-
-- Use Active Record to interact with a database.
-- Have a minimum of two models with a one-to-many relationship.
-- Create API routes in Sinatra that handles at least three different CRUD
-  actions for at least one of your Active Record models.
-- Build a separate React frontend application that interacts with the API to
-  perform CRUD actions.
-- Use good OO design patterns. You should have separate classes for each of your
-  models, and create instance and class methods as necessary.
-
-For example, build a todo list application with a React frontend interface and a
-Sinatra backend API, where a user can:
-
-- **Create** a new todo
-- **Read** a list of all todos
-- **Update** an individual todo
-- **Delete** a todo
-
-A `Todo` can be tagged with a `Category`, so that each todo _belongs to_ a
-category and each category _has many_ todos.
-
-## Getting Started
-
-### Backend Setup
-
-This repository has all the starter code needed to get a Sinatra backend up and
-running. [**Fork and clone**][fork link] this repository to get started. Then, run
-`bundle install` to install the gems.
-
-[fork link]: https://github.com/learn-co-curriculum/phase-3-sinatra-react-project/fork
-
-The `app/controllers/application_controller.rb` file has an example GET route
-handler. Replace this route with routes for your project.
-
-You can start your server with:
-
-```console
-$ bundle exec rake server
-```
-
-This will run your server on port
-[http://localhost:9292](http://localhost:9292).
-
-### Frontend Setup
-
-Your backend and your frontend should be in **two different repositories**.
-
-Create a new repository in a **separate folder** with a React app for your
-frontend. `cd` out of the backend project directory, and use
-[create-react-app][] to generate the necessary code for your React frontend:
-
-```console
-$ npx create-react-app my-app-frontend
-```
-
-After creating the project locally, you should also
-[create a repository on GitHub][create repo] to host your repo and help
-collaborate, if you're working with a partner.
-
-### Fetch Example
-
-Your React app should make fetch requests to your Sinatra backend! Here's an
-example:
-
-```js
-fetch("http://localhost:9292/test")
-  .then((r) => r.json())
-  .then((data) => console.log(data));
-```
-
-## Project Tips
-
-- This project is intended to focus more on the backend than the frontend, so
-  try and keep the React side of things relatively simple. Focus on working with
-  Active Record and performing CRUD actions. What are some interesting queries you can write? What kinds of questions can you ask of your data?
-- Once you have a project idea, come up with a domain model and decide what
-  relationships exist between the models in your application. Use a tool like
-  [dbdiagram.io][] to help visualize your models.
-- Decide on your API endpoints. What data should they return? What kind of CRUD
-  action should they perform? What data do they need from the client?
-- Use [Postman][postman download] to test your endpoints.
-- Use `binding.pry` to debug your requests on the server. It's very helpful to use a
-  `binding.pry` in your controller within a route to see what `params` are being
-  sent.
-- Use the [Network Tab in the Dev Tools][network tab] in the frontend to debug
-  your requests.
-
-## Resources
-
-- [create-react-app][]
-- [dbdiagram.io][]
-- [Postman][postman download]
-
-[create-react-app]: https://create-react-app.dev/docs/getting-started
-[create repo]: https://docs.github.com/en/get-started/quickstart/create-a-repo
-[dbdiagram.io]: https://dbdiagram.io/
-[postman download]: https://www.postman.com/downloads/
-[network tab]: https://developer.chrome.com/docs/devtools/network/
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
