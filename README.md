@@ -1,9 +1,10 @@
 # Title:
+
 "Personal Budget Tracker"
 
 # Project Description:
 
-This repository contains the backend architecture which was originally built to be used with this fronend: https://personnamedmike.github.io/personal-budget-tracker/.
+This repository contains the backend architecture which was originally built to be used with this frontend: https://personnamedmike.github.io/personal-budget-tracker/.
 
 We used Active Record for the database, Sinatra to build the API, and Ruby to add logic to the API.
 
@@ -35,30 +36,39 @@ If you wish to build on top of the project, you can explore the various endpoint
 # Important endpoints:
 
 # Add expense entry:
+
 post '/add_expenses'
 
 # Modify expense by id. Currently this is used to look up expenses by its "paid" boolean value.
+
 patch 'update/expenses/:id'
 
 # Delete expense entry:
+
 delete 'delete_expense/:id'
 
-# Add income entry: 
+# Add income entry:
+
 post '/add_income'
 
-# Read all income entries: 
+# Read all income entries:
+
 get '/incomes'
 
 # Delete income entry:
+
 delete '/delete_incomes/:id'
 
 # Read expenses by time. Currently this can lookup an expense summary based on a few options: "current-month", "last-month", "last-90-days", "current-year", "last-year", "all time":
+
 get '/expenses_summary/:time'
 
 # Read incomes by time. Same as the previously mentioned endpoint, but for incomes:
+
 get '/incomes_summary/:time'
 
 # Credits
+
 Other collaborators on this product:
 TzJorden: https://github.com/tzjorden
 JoshHayles: https://github.com/JoshHayles
