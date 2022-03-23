@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_03_09_210543) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "expenses", force: :cascade do |t|
     t.string "description"
     t.float "cost"
@@ -20,7 +23,7 @@ ActiveRecord::Schema.define(version: 2022_03_09_210543) do
     t.string "due_date"
     t.boolean "paid"
     t.string "notes"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_expenses_on_user_id"
   end
 
@@ -29,14 +32,14 @@ ActiveRecord::Schema.define(version: 2022_03_09_210543) do
     t.float "amount"
     t.string "date"
     t.string "notes"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_incomes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.integer "expense_id"
-    t.integer "income_id"
+    t.bigint "expense_id"
+    t.bigint "income_id"
     t.index ["expense_id"], name: "index_users_on_expense_id"
     t.index ["income_id"], name: "index_users_on_income_id"
   end

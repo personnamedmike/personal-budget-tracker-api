@@ -7,7 +7,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/expenses" do
-    expenses = Expense.all.order('date')
+    # expenses = Expense.all.order("date")
+    expenses = Expense.order("date")
     expenses.to_json
   end
 
@@ -17,7 +18,7 @@ class ApplicationController < Sinatra::Base
       cost: params[:cost],
       date: params[:date],
       frequency: params[:frequency],
-      due_date: params[:due_date],
+      due_date: params[:dueDate],
       paid: params[:paid],
       notes: params[:notes]
     )
@@ -33,11 +34,11 @@ class ApplicationController < Sinatra::Base
   get "/expenses_summary/:time" do
     case params[:time]
     when "current-month"
-      this_month = Expense.all.filter do |expense|
-        date = Date.parse(expense.date)
-        date.month == Date.today.month && date.year == Date.today.year
-      end
-      costs = this_month.pluck('cost').sum
+      # this_month = Expense.all.filter do |expense|
+      #   date = Date.parse(expense.date)
+      #   date.month == Date.today.month && date.year == Date.today.year
+      # end
+      costs = Expense.current_month
       costs.to_json
     when "last-month"
       last_month = Expense.all.filter do |expense|
